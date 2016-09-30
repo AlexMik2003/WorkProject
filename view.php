@@ -143,7 +143,8 @@ function html($html)
                     $ins = $sql->prepare("INSERT INTO price (price,data,id_tovar,id_point,id_user) VALUES (:price,:data,:id_tovar,:id_point,:id_user)");
                     $ins->bindParam(":price",$array[$i+1]);
                     $ins->bindParam(":data",$data);
-                    $ins->bindParam(":id_tovar",$i);
+                    $t = $i++;
+                    $ins->bindParam(":id_tovar",$t);
                     $ins->bindParam(":id_point",$point_id);
                     $ins->bindParam(":id_user",$user_id);
                     $ins->execute();
