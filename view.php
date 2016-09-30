@@ -14,7 +14,7 @@ function db()
     $user = "root";
     $password = "dfvgbh99";
 
-    $db = "mysql:host=$host;dbname=$dbname";
+    $db = "mysql:host=$host;dbname=$dbname;charset=utf8";
     $opt = array(
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
@@ -37,7 +37,17 @@ function html($html)
                 <table>
                     <tr>
                         <td><label>Login: </label></td>
-                        <td><input type="text" id="login" name="login" size="15" maxlength="15" placeholder="Enter your name..."></td>
+                        <!--<td><input type="text" id="login" name="login" size="15" maxlength="15" placeholder="Enter your name..."></td>-->
+                         <td>
+                        <select id="login" name="login">
+                        <option disabled selected>Ваш логин:</option>';
+                        $query = $sql->prepare("SELECT * FROM users");
+                        $query->execute();
+                        foreach ($query as $row) {
+                            $view .= "<option>" . $row['login'] . "</option>";
+                        }
+                    $view .= '</select>
+                    </td>
                     </tr>
                     <tr>
                         <td><label>Password: </label></td>

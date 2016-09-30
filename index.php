@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <title>Monitoring</title>
-    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset="utf-8">
     <link rel="stylesheet" type="text/css" href="style.css">
    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 </head>
