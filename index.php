@@ -26,18 +26,16 @@ if (empty($_SESSION['login']) or empty($_SESSION['id']))
     echo $html;
 
 }
-else  //Иначе.
+else  //Иначе проверяем пользователя по базе.
 {
     $sql = db();
-//Формирование оператора SQL SELECT
     $query = $sql->prepare("SELECT * FROM users WHERE login = ?");
-//Цикл по множеству записей и вывод необходимых записей
     $query->execute([$_SESSION['login']]);
     foreach ($query as $row)
     {
         $name = $row["login"];
     }
-    // Если не пусты, то мы выводим ссылку
+    // Если пользователь есть в базе, то мы выводим ссылку
     $html = html(1);
     echo $html;
 }

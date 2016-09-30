@@ -6,6 +6,7 @@
  * Time: 13:11
  */
 
+//Подключение к базе
 function db()
 {
     $host = "localhost";
@@ -22,24 +23,14 @@ function db()
     return $sql;
 }
 
+//Функция вывода инофрмации на странице в зависимости от ввода пользователя
 function html($html)
 {
-    /*$host = "localhost";
-    $dbname = "monitoring";
-    $user = "root";
-    $password = "dfvgbh99";
-
-    $db = "mysql:host=$host;dbname=$dbname";
-    $opt = array(
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-    );
-    $sql = new PDO($db, $user, $password, $opt);*/
     $sql = db();
 
     $view = "";
     switch ($html) {
-        case 0:
+        case 0:  //Форма входа на сайт
             $view .= '
             <div class="auth">
             <form action="auth.php" method="post">
@@ -59,7 +50,7 @@ function html($html)
             </form>
          </div>';
             break;
-        case 1:
+        case 1:  //Форма ввода и выбора информации
             $view .= '
               <div class="point">
                <p id="back"><a href="exit.php">Выйти</a></p>
@@ -85,7 +76,8 @@ function html($html)
                         <tr>
                     <td id='label'><label>" . $row['tovar'] . "</label></td>
                     <td><input type='text' name='" . $row["id"] . "' id='price' class='price' size='15' maxlength='15' placeholder='12345.67' pattern='^\d+\.?(\d{1,2})?$\'></td>
-                              <script>
+                    <!-- Скрипт проверки введенной цены-->
+                              <script> 
                 var flag = false;
                 $('.price').on({
                     input: function(e){
@@ -122,7 +114,7 @@ function html($html)
                 </tr>
                 </table>                
                 </form>';
-            if(isset($_POST["point"]))
+            if(isset($_POST["point"])) //Запись данных в БД
             {
                 $data = date("Y-m-d H:i:s");
                 $array = $_REQUEST;
@@ -154,6 +146,8 @@ function html($html)
     return $view;
 }
 
+
+//Вывод страницы ошибок
 function error($error)
 {
     $err ='<!DOCTYPE html>
